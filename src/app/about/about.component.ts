@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Alert } from 'fuel-ui/fuel-ui';
 /*
  * We're loading this component asynchronously
  * We are using some magic with es6-promise-loader that will wrap the module with a Promise
@@ -10,23 +11,10 @@ console.log('`About` component loaded asynchronously');
 
 @Component({
   selector: 'about',
-  styles: [`
-  `],
-  template: `
-    <h1>About</h1>
-    <div>
-      For hot module reloading run
-      <pre>npm run start:hmr</pre>
-    </div>
-    <div>
-      <h3>
-        patrick@AngularClass.com
-      </h3>
-    </div>
-    <pre>this.localState = {{ localState | json }}</pre>
-  `
+  templateUrl: "./template.component.html"
 })
 export class About {
+showAlert: boolean = false;
   localState: any;
   constructor(public route: ActivatedRoute) {
 

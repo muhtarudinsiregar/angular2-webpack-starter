@@ -1,7 +1,9 @@
 /*
  * Angular 2 decorators and services
  */
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Router, NavigationStart, NavigationEnd } from '@angular/router';
+import { Component, ViewEncapsulation, OnInit, ViewContainerRef } from '@angular/core';
+import * as Pace from 'pace-progress/pace';
 
 import { AppState } from './app.service';
 
@@ -63,9 +65,20 @@ export class App {
   name = 'Angular 2 Webpack Starter';
   url = 'https://twitter.com/AngularClass';
 
-  constructor(
-    public appState: AppState) {
+  public constructor(
+    public appState: AppState,
+    private router: Router,
+    private viewContainerRef: ViewContainerRef
+  ) {
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationStart) {
+        Pace.start();
+      }
 
+      if (event instanceof NavigationStart) {
+        Pace.stop();
+      }
+    })
   }
 
   ngOnInit() {
